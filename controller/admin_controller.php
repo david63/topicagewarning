@@ -51,7 +51,7 @@ class admin_controller implements admin_interface
 	* @param \phpbb\template\template	$template	Template object
 	* @param \phpbb\user				$user		User object
 	* @param ContainerInterface			$container	Service container interface
-	* @param phpbb\language\language	$language
+	* @param \phpbb\language\language	$language
 	* @access public
 	*/
 	public function __construct(config $config, request $request, template $template, user $user, ContainerInterface $container, language $language)
@@ -124,7 +124,7 @@ class admin_controller implements admin_interface
 		foreach ($forum_list as $f_id => $f_row)
 		{
 			$s_forum_options .= '<option value="' . $f_id . '"' . ((in_array($f_id, $taw_forums)) ? ' selected="selected"' : '') . (($f_row['disabled']) ? ' disabled="disabled" class="disabled-option"' : '') . '>' . $f_row['padding'] . $f_row['forum_name'] . '</option>';
- 		}
+		}
 
 		// Template vars for header panel
 		$this->template->assign_vars(array(

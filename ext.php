@@ -12,7 +12,7 @@ namespace david63\topicagewarning;
 class ext extends \phpbb\extension\base
 {
 	const TAW_VERSION = '2.1.0 RC3';
-	
+
 	/**
 	* Enable extension if phpBB version requirement is met
 	*
@@ -22,7 +22,7 @@ class ext extends \phpbb\extension\base
 	* @access public
 	*/
 	public function is_enableable()
- 	{
+	{
 		// Requires phpBB 3.2.0 or newer.
 		$is_enableable = phpbb_version_compare(PHPBB_VERSION, '3.2.0', '>=');
 
@@ -41,5 +41,5 @@ class ext extends \phpbb\extension\base
 		}
 
 		return $is_enableable;
- 	}
+	}
 }

@@ -58,7 +58,7 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\user						$user		User object
 	* @param \phpbb\db\driver\driver_interface	$db
 	* @param ContainerInterface					$container	Service container interface
-	* @param phpbb\language\language			$language
+	* @param \phpbb\language\language			$language
 	* @access public
 	*/
 	public function __construct(config $config, template $template, auth $auth, user $user, driver_interface $db, $container, language $language)
@@ -144,7 +144,7 @@ class listener implements EventSubscriberInterface
 				$langkey = 'TOPIC_AGE_WARNING';
 
 				// If they want the topic to be locked, lock it.
-				if($this->config['taw_lock'])
+				if ($this->config['taw_lock'])
 				{
 					$this->db->sql_query(
 						'UPDATE ' . TOPICS_TABLE . '
@@ -173,7 +173,7 @@ class listener implements EventSubscriberInterface
 					'S_TOPIC_AGE_WARNING'	=> true,
 
 					'TOPIC_AGE_WARNING'		=> $this->language->lang($langkey, $this->pretty_interval),
-		   		));
+				));
 			}
 		}
 	}
@@ -229,7 +229,7 @@ class listener implements EventSubscriberInterface
 		$current_level	= 1; // Starting point
 		$result			= array();
 
-		foreach($blocks as $block)
+		foreach ($blocks as $block)
 		{
 			if ($current_level > $levels)
 			{

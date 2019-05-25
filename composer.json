@@ -1,0 +1,42 @@
+{
+	"name": "david63/topicagewarning",
+	"type": "phpbb-extension",
+	"description": "This extension displays a warning to users when they attempt to reply to a topic that has had no replies for a specified amount of time.",
+	"version": "2.1.0-rc3",
+	"time": "2019-05-12",
+	"keywords": [
+		"phpbb",
+		"extension",
+		"topic",
+		"age",
+		"warning"
+	],
+	"license": "GPL-2.0-only",
+	"authors": [{
+			"name": "David Wood",
+			"role": "Mod converter"
+		},
+        {
+            "name": "David King",
+            "email": "imkingdavid@gmail.com",
+            "homepage": "http://www.phpbbdevelopers.net",
+            "role": "Original Mod developer"
+        }
+	],
+	"require": {
+        "php": ">=5.4.0",
+		"phpbb/phpbb": ">=3.2.0",
+        "composer/installers": "~1.0"
+    },
+	"extra": {
+		"display-name": "[+] Topic age warning",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.2.0"
+		},
+		"version-check": {
+        	"host": "version.phpbbdev.space",
+        	"directory": "/3.2",
+        	"filename": "/topic_age_warning_version_file.json"
+    	}
+	}
+}

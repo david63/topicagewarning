@@ -1,0 +1,23 @@
+services:
+    david63.topicagewarning.listener:
+        class: david63\topicagewarning\event\listener
+        arguments:
+            - '@config'
+            - '@template'
+            - '@auth'
+            - '@user'
+            - '@dbal.conn'
+            - '@service_container'
+            - '@language'
+        tags:
+            - { name: event.listener }
+
+    david63.topicagewarning.admin.controller:
+        class: david63\topicagewarning\controller\admin_controller
+        arguments:
+            - '@config'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@service_container'
+            - '@language'

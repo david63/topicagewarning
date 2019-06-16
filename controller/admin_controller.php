@@ -9,13 +9,14 @@
 
 namespace david63\topicagewarning\controller;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use phpbb\config\config;
 use phpbb\request\request;
 use phpbb\template\template;
 use phpbb\user;
+use phpbb\config\db_text;
 use phpbb\language\language;
-use david63\topicagewarning\ext;
+use phpbb\log\log;
+use david63\topicagewarning\core\functions;
 
 /**
 * Admin controller
@@ -34,11 +35,17 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var ContainerInterface */
-	protected $container;
+	/** @var \phpbb\config\db_text */
+	protected $config_text;
 
 	/** @var \phpbb\language\language */
 	protected $language;
+
+	/** @var \phpbb\log\log */
+	protected $log;
+
+	/** @var \david63\topicagewarning\core\functions */
+	protected $functions;
 
 	/** @var string Custom form action */
 	protected $u_action;
@@ -46,22 +53,26 @@ class admin_controller implements admin_interface
 	/**
 	* Constructor for admin controller
 	*
-	* @param \phpbb\config\config		$config		Config object
-	* @param \phpbb\request\request		$request	Request object
-	* @param \phpbb\template\template	$template	Template object
-	* @param \phpbb\user				$user		User object
-	* @param ContainerInterface			$container	Service container interface
-	* @param \phpbb\language\language	$language
+	* @param \phpbb\config\config						$config			Config object
+	* @param \phpbb\request\request						$request		Request object
+	* @param \phpbb\template\template					$template		Template object
+	* @param \phpbb\user								$user			User object
+	* @param \phpbb\config\db_text      				$config_text	Config text object
+	* @param \phpbb\language\language					$language		Language object
+	* @param \phpbb\log\log								$log			Log object
+	* @param \david63\topicagewarning\core\functions	functions		Functions for the extension
 	* @access public
 	*/
-	public function __construct(config $config, request $request, template $template, user $user, ContainerInterface $container, language $language)
+	public function __construct(config $config, request $request, template $template, user $user, db_text $config_text, language $language, log $log, functions $functions)
 	{
 		$this->config		= $config;
 		$this->request		= $request;
 		$this->template		= $template;
 		$this->user			= $user;
-		$this->container	= $container;
+		$this->config_text 	= $config_text;
 		$this->language		= $language;
+		$this->log			= $log;
+		$this->functions	= $functions;
 	}
 
 	/**
@@ -73,18 +84,18 @@ class admin_controller implements admin_interface
 	public function display_options()
 	{
 		// Add the language files
-		$this->language->add_lang('acp_topicagewarning', 'david63/topicagewarning');
+		$this->language->add_lang('acp_topicagewarning', $this->functions->get_ext_namespace());
 
 		// Create a form key for preventing CSRF attacks
 		$form_key = 'topicagewarning';
 		add_form_key($form_key);
 
+		$back = false;
+
 		// Start initial var setup
 		$all_forums			= $this->request->variable('taw_all_forums', 0);
 		$selected_forums	= $this->request->variable('taw_forums', array(0));
 		$submit				= ($this->request->is_set_post('submit')) ? true : false;
-
-		$this->config_text	= $this->container->get('config_text');
 
 		// Is the form being submitted
 		if ($submit)
@@ -106,8 +117,7 @@ class admin_controller implements admin_interface
 			$this->set_options();
 
 			// Add option settings change action to the admin log
-			$phpbb_log = $this->container->get('log');
-			$phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'TAW_LOG');
+			$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'TAW_LOG');
 
 			// Option settings have been updated and logged
 			// Confirm this to the user and provide link back to previous page
@@ -131,7 +141,12 @@ class admin_controller implements admin_interface
 			'HEAD_TITLE'		=> $this->language->lang('TOPIC_AGE_WARNING'),
 			'HEAD_DESCRIPTION'	=> $this->language->lang('TOPIC_AGE_WARNING_EXPLAIN'),
 
-			'VERSION_NUMBER'	=> ext::TAW_VERSION,
+			'NAMESPACE'			=> $this->functions->get_ext_namespace('twig'),
+
+			'S_BACK'			=> $back,
+			'S_VERSION_CHECK'	=> $this->functions->version_check(),
+
+			'VERSION_NUMBER'	=> $this->functions->get_this_version(),
 		));
 
 		// Set output vars for display in the template

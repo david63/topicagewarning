@@ -4,7 +4,9 @@ This extension displays a warning to users when they attempt to reply to a topic
 
 [![Build Status](https://travis-ci.com/david63/topicagewarning.svg?branch=master)](https://travis-ci.com/david63/topicagewarning)
 [![License](https://poser.pugx.org/david63/topicagewarning/license)](https://packagist.org/packages/david63/topicagewarning)
-[![Latest Stable Version](https://poser.pugx.org/david63/topicagewarning/v/stable)](https://packagist.org/packages/david63/topicagewarning)[![Latest Unstable Version](https://poser.pugx.org/david63/topicagewarning/v/unstable)](https://packagist.org/packages/david63/topicagewarning)[![Total Downloads](https://poser.pugx.org/david63/topicagewarning/downloads)](https://packagist.org/packages/david63/topicagewarning)
+[![Latest Stable Version](https://poser.pugx.org/david63/topicagewarning/v/stable)](https://packagist.org/packages/david63/topicagewarning)
+[![Latest Unstable Version](https://poser.pugx.org/david63/topicagewarning/v/unstable)](https://packagist.org/packages/david63/topicagewarning)
+[![Total Downloads](https://poser.pugx.org/david63/topicagewarning/downloads)](https://packagist.org/packages/david63/topicagewarning)
 
 ## Minimum Requirements
 * phpBB 3.2.0

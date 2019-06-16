@@ -1,5 +1,4 @@
-{% include 'overall_header.html' %}
-{% include '@david63_topicagewarning/head_panel.html' %}
+{% include '@' ~ NAMESPACE ~ '/head_panel.html' %}
 
 <form id="topicagewarning" method="post" action="{U_ACTION}">
 
@@ -7,14 +6,14 @@
 		<legend>{{ lang('TAW_SETTINGS') }}</legend>
 
 		<dl>
-			<dt><label for="taw_interval">{{ lang('TAW_INTERVAL') }}{{ lang('COLON') }}</label><br /><span>{{ lang('TAW_INTERVAL_EXPLAIN') }}</span></dt>
+			<dt><label for="taw_interval">{{ lang('TAW_INTERVAL') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_INTERVAL_EXPLAIN') }}</span></dt>
 			<dd>
 				<input class="textbox2" name="taw_interval" type="number" id="taw_interval" value="{{ TAW_INTERVAL }}" maxlength="2" size="2" min="0" max="30" />&nbsp;&nbsp;{TAW_INTERVAL_TYPE}
 			</dd>
 		</dl>
 
 		<dl>
-			<dt><label for="taw_lock">{{ lang('TAW_LOCK') }}{{ lang('COLON') }}</label><br /><span>{{ lang('TAW_LOCK_EXPLAIN') }}</span></dt>
+			<dt><label for="taw_lock">{{ lang('TAW_LOCK') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_LOCK_EXPLAIN') }}</span></dt>
 			<dd>
 				<input type="radio" id="taw_lock1" name="taw_lock" value="1"{% if TAW_LOCK %} checked="checked"{% endif %} />
 				<label class="set" for="taw_lock1">{{ lang('YES') }}</label>
@@ -24,7 +23,7 @@
 		</dl>
 
 		<dl>
-			<dt><label for="taw_author_exempt">{{ lang('TAW_AUTHOR_EXEMPT') }}{{ lang('COLON') }}</label><br /><span>{{ lang('TAW_AUTHOR_EXEMPT_EXPLAIN') }}</span></dt>
+			<dt><label for="taw_author_exempt">{{ lang('TAW_AUTHOR_EXEMPT') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_AUTHOR_EXEMPT_EXPLAIN') }}</span></dt>
 			<dd>
 				<input type="radio" id="taw_author_exempt1" name="taw_author_exempt" value="1"{% if TAW_AUTHOR_EXEMPT %} checked="checked"{% endif %} />
 				<label class="set" for="taw_author_exempt1">{{ lang('YES') }}</label>
@@ -34,7 +33,7 @@
 		</dl>
 
 		<dl>
-			<dt><label for="taw_admin_exempt">{{ lang('TAW_ADMIN_EXEMPT') }}{{ lang('COLON') }}</label><br /><span>{{ lang('TAW_ADMIN_EXEMPT_EXPLAIN') }}</span></dt>
+			<dt><label for="taw_admin_exempt">{{ lang('TAW_ADMIN_EXEMPT') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_ADMIN_EXEMPT_EXPLAIN') }}</span></dt>
 			<dd>
 				<input type="radio" id="taw_admin_exempt1" name="taw_admin_exempt" value="1"{% if TAW_ADMIN_EXEMPT %} checked="checked"{% endif %} />
 				<label class="set" for="taw_admin_exempt1">{{ lang('YES') }}</label>
@@ -44,7 +43,7 @@
 		</dl>
 
 		<dl>
-			<dt><label for="taw_mod_exempt">{{ lang('TAW_MOD_EXEMPT') }}{{ lang('COLON') }}</label><br /><span>{{ lang('TAW_MOD_EXEMPT_EXPLAIN') }}</span></dt>
+			<dt><label for="taw_mod_exempt">{{ lang('TAW_MOD_EXEMPT') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_MOD_EXEMPT_EXPLAIN') }}</span></dt>
 			<dd>
 				<input type="radio" id="taw_mod_exempt1" name="taw_mod_exempt" value="1"{% if TAW_MOD_EXEMPT %} checked="checked"{% endif %} />
 				<label class="set" for="taw_mod_exempt1">{{ lang('YES') }}</label>
@@ -54,7 +53,7 @@
 		</dl>
 
 		<dl>
-			<dt><label for="taw_last_post">{{ lang('TAW_LAST_POST') }}{{ lang('COLON') }}</label><br /><span>{{ lang('TAW_LAST_POST_EXPLAIN') }}</span></dt>
+			<dt><label for="taw_last_post">{{ lang('TAW_LAST_POST') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_LAST_POST_EXPLAIN') }}</span></dt>
 			<dd>
 				<input type="radio" id="taw_last_post1" name="taw_last_post" value="1"{% if TAW_LAST_POST %} checked="checked"{% endif %} />
 				<label class="set" for="taw_last_post1">{{ lang('YES') }}</label>
@@ -64,7 +63,7 @@
 		</dl>
 
 		<dl>
-			<dt><label for="taw_quickreply">{{ lang('TAW_QUICKREPLY') }}{{ lang('COLON') }}</label><br /><span>{{ lang('TAW_QUICKREPLY_EXPLAIN') }}</span></dt>
+			<dt><label for="taw_quickreply">{{ lang('TAW_QUICKREPLY') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_QUICKREPLY_EXPLAIN') }}</span></dt>
 			<dd>
 				<input type="radio" id="taw_quickreply1" name="taw_quickreply" value="1"{% if TAW_QUICKREPLY %} checked="checked"{% endif %} />
 				<label class="set" for="taw_quickreply1">{{ lang('YES') }}</label>
@@ -74,7 +73,7 @@
 		</dl>
 
 		<dl>
-			<dt><label for="taw_forums">{{ lang('TAW_LOOK_UP_FORUMS') }}{{ lang('COLON') }}</label><br /><span>{{ lang('TAW_LOOK_UP_FORUMS_EXPLAIN') }}</span></dt>
+			<dt><label for="taw_forums">{{ lang('TAW_LOOK_UP_FORUMS') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_LOOK_UP_FORUMS_EXPLAIN') }}</span></dt>
 			<dd>
 				<select id="multi" name="taw_forums[]" multiple="multiple" size="10">{{ S_FORUM_OPTIONS }}</select>
 			</dd>
@@ -91,7 +90,7 @@
 		</dl>
 
 		<dl>
-			<dt><label for="taw_message_top">{{ lang('TAW_MESSAGE_TOP') }}{{ lang('COLON') }}</label><br /><span>{{ lang('TAW_MESSAGE_TOP_EXPLAIN') }}</span></dt>
+			<dt><label for="taw_message_top">{{ lang('TAW_MESSAGE_TOP') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_MESSAGE_TOP_EXPLAIN') }}</span></dt>
 			<dd>
 				<input type="radio" id="taw_message_top1" name="taw_message_top" value="1"{% if TAW_MESSAGE_TOP %} checked="checked"{% endif %} />
 				<label class="set" for="taw_message_top1">{{ lang('YES') }}</label>
@@ -101,7 +100,7 @@
 		</dl>
 
 		<dl>
-			<dt><label for="taw_message_bottom">{{ lang('TAW_MESSAGE_BOTTOM') }}{{ lang('COLON') }}</label><br /><span>{{ lang('TAW_MESSAGE_BOTTOM_EXPLAIN') }}</span></dt>
+			<dt><label for="taw_message_bottom">{{ lang('TAW_MESSAGE_BOTTOM') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_MESSAGE_BOTTOM_EXPLAIN') }}</span></dt>
 			<dd>
 				<input type="radio" id="taw_message_bottom1" name="taw_message_bottom" value="1"{% if TAW_MESSAGE_BOTTOM %} checked="checked"{% endif %} />
 				<label class="set" for="taw_message_bottom1">{{ lang('YES') }}</label>
@@ -111,7 +110,7 @@
 		</dl>
 
 		<dl>
-			<dt><label for="taw_show_locked">{{ lang('TAW_SHOW_LOCKED') }}{{ lang('COLON') }}</label><br /><span>{{ lang('TAW_SHOW_LOCKED_EXPLAIN') }}</span></dt>
+			<dt><label for="taw_show_locked">{{ lang('TAW_SHOW_LOCKED') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_SHOW_LOCKED_EXPLAIN') }}</span></dt>
 			<dd>
 				<input type="radio" id="taw_show_locked1" name="taw_show_locked" value="1"{% if TAW_SHOW_LOCKED %} checked="checked"{% endif %} />
 				<label class="set" for="taw_show_locked1">{{ lang('YES') }}</label>
@@ -131,5 +130,4 @@
 	</fieldset>
 </form>
 
-{% include '@david63_topicagewarning/donate.html' %}
-{% include 'overall_footer.html' %}
+{% include '@' ~ NAMESPACE ~ '/donate.html' %}

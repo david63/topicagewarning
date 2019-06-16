@@ -7,8 +7,10 @@ services:
             - '@auth'
             - '@user'
             - '@dbal.conn'
-            - '@service_container'
             - '@language'
+            - '@config_text'			
+            - '@david63.topicagewarning.core.functions'
+            - '%tables%'
         tags:
             - { name: event.listener }
 
@@ -19,5 +21,12 @@ services:
             - '@request'
             - '@template'
             - '@user'
-            - '@service_container'
+            - '@config_text'
             - '@language'
+            - '@log'
+            - '@david63.topicagewarning.core.functions'
+
+    david63.topicagewarning.core.functions:
+        class: david63\topicagewarning\core\functions
+        arguments:
+            - '@ext.manager'

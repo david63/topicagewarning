@@ -13,12 +13,15 @@ namespace david63\topicagewarning\event;
 * @ignore
 */
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
 use phpbb\config\config;
 use phpbb\template\template;
 use phpbb\auth\auth;
 use phpbb\user;
 use phpbb\db\driver\driver_interface;
 use phpbb\language\language;
+use phpbb\config\db_text;
+use david63\topicagewarning\core\functions;
 
 /**
 * Event listener
@@ -40,11 +43,17 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
-	/** @var ContainerInterface */
-	protected $container;
-
 	/** @var \phpbb\language\language */
 	protected $language;
+
+	/** @var \phpbb\config\db_text */
+	protected $config_text;
+
+	/** @var \david63\topicagewarning\core\functions */
+	protected $functions;
+
+	/** @var string phpBB tables */
+	protected $tables;
 
 	/** @var string Custom form action */
 	protected $u_action;
@@ -52,24 +61,29 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor for listener
 	*
-	* @param \phpbb\config\config				$config		Config object
-	* @param \phpbb\template\template			$template	Template object
-	* @param \phpbb\auth\auth 					$auth
-	* @param \phpbb\user						$user		User object
-	* @param \phpbb\db\driver\driver_interface	$db
-	* @param ContainerInterface					$container	Service container interface
-	* @param \phpbb\language\language			$language
+	* @param \phpbb\config\config						$config			Config object
+	* @param \phpbb\template\template					$template		Template object
+	* @param \phpbb\auth\auth 							$auth			Auth object
+	* @param \phpbb\user								$user			User object
+	* @param \phpbb\db\driver\driver_interface			$db				The db connection
+	* @param \phpbb\language\language					$language		Language object
+	* @param \phpbb\config\db_text      				$config_text	Config text object
+	* @param \david63\topicagewarning\core\functions	functions		Functions for the extension
+	* @param array										$tables			phpBB db tables
+	*
 	* @access public
 	*/
-	public function __construct(config $config, template $template, auth $auth, user $user, driver_interface $db, $container, language $language)
+	public function __construct(config $config, template $template, auth $auth, user $user, driver_interface $db, language $language, db_text $config_text, functions $functions, $tables)
 	{
 		$this->config		= $config;
 		$this->template		= $template;
 		$this->auth			= $auth;
 		$this->user			= $user;
 		$this->db			= $db;
-		$this->container	= $container;
 		$this->language		= $language;
+		$this->config_text 	= $config_text;
+		$this->functions	= $functions;
+		$this->tables		= $tables;
 	}
 
 	/**
@@ -96,21 +110,19 @@ class listener implements EventSubscriberInterface
 	public function viewtopic_warning_message($event)
 	{
 		$topic_data = $event['topic_data'];
-
-		$this->config_text	= $this->container->get('config_text');
-		$taw_fora			= $this->config_text->get_array(array('taw_forums'));
-		$taw_forums			= json_decode($taw_fora['taw_forums']);
+		$taw_fora	= $this->config_text->get_array(array('taw_forums'));
+		$taw_forums	= json_decode($taw_fora['taw_forums']);
 
 		// Let's just make sure we need to do some processing
 		if (($this->config['taw_all_forums'] || in_array($topic_data['forum_id'], $taw_forums)) && $topic_data['topic_status'] != ITEM_LOCKED && $this->config['taw_interval'] > 0)
 		{
-			$this->language->add_lang('common', 'david63/topicagewarning');
+			$this->language->add_lang('common', $this->functions->get_ext_namespace());
 
-			$time				= time();
-			$this->day			= 60 * 60 * 24;				// aka 86,400 seconds. Broken into seconds * minutes * hours = 1 day.
-			$this->week			= $this->day * 7;			// 7 days in a week
-			$this->month		= $this->day * 30.436875;	//30.436875 = average length of a month in days (according to wikipedia)
-			$this->year			= $this->month * 12;		// 12 months in a year
+			$time			= time();
+			$this->day		= 60 * 60 * 24;				// aka 86,400 seconds. Broken into seconds * minutes * hours = 1 day.
+			$this->week		= $this->day * 7;			// 7 days in a week
+			$this->month	= $this->day * 30.436875;	//30.436875 = average length of a month in days (according to wikipedia)
+			$this->year		= $this->month * 12;		// 12 months in a year
 
 			$forum_id			= $topic_data['forum_id'];
 			$check_time			= $topic_data[($this->config['taw_last_post']) ? 'topic_last_post_time' : 'topic_time'];
@@ -147,7 +159,7 @@ class listener implements EventSubscriberInterface
 				if ($this->config['taw_lock'])
 				{
 					$this->db->sql_query(
-						'UPDATE ' . TOPICS_TABLE . '
+						'UPDATE ' . $this->tables['topics'] . '
 						SET topic_status = ' . ITEM_LOCKED . '
 						WHERE topic_id = '  . (int) $topic_data['topic_id'] . '
 						AND topic_moved_id = 0'

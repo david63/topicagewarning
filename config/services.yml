@@ -1,6 +1,3 @@
-imports:
-    - { resource: phpbb_tables.yml }
-
 services:
     david63.topicagewarning.listener:
         class: david63\topicagewarning\event\listener

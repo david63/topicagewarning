@@ -30,3 +30,6 @@ services:
         class: david63\topicagewarning\core\functions
         arguments:
             - '@ext.manager'
+
+    _defaults:
+        public: true

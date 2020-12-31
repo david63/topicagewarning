@@ -239,7 +239,7 @@ class listener implements EventSubscriberInterface
 		$diff			= abs($date1 - $date2);
 		$levels			= 2; // How specific to be; 1 = "1 year"; 2 = "1 year & 2 months"; 3 = "1 year, 2 months & 3 weeks"; etc.
 		$current_level	= 1; // Starting point
-		$result			= array();
+		$result			= [];
 
 		foreach ($blocks as $block)
 		{

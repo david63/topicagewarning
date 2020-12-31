@@ -84,8 +84,7 @@ class admin_controller implements admin_interface
 	public function display_options()
 	{
 		// Add the language files
-		$this->language->add_lang('acp_topicagewarning', $this->functions->get_ext_namespace());
-		$this->language->add_lang('acp_common', $this->functions->get_ext_namespace());
+		$this->language->add_lang(array('acp_topicagewarning', 'acp_common'), $this->functions->get_ext_namespace());
 
 		// Create a form key for preventing CSRF attacks
 		$form_key = 'topicagewarning';
@@ -128,7 +127,7 @@ class admin_controller implements admin_interface
 		// Build the forum selection list
 		$forum_list	= make_forum_select(false, false, true, true, false, false, true);
 		$taw_fora	= $this->config_text->get_array(array('taw_forums'));
-		$taw_forums = (!empty($taw_fora['taw_forums'])) ? json_decode($taw_fora['taw_forums']) : array();
+		$taw_forums = (!empty($taw_fora['taw_forums'])) ? json_decode($taw_fora['taw_forums']) : [];
 
 		$s_forum_options = '';
 

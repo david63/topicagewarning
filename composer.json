@@ -28,7 +28,7 @@
         "composer/installers": "~1.0"
     },
 	"extra": {
-		"display-name": "[**] Topic age warning",
+		"display-name": "Topic age warning",
 		"soft-require": {
 			"phpbb/phpbb": ">=3.3.0"
 		},

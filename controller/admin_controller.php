@@ -150,7 +150,7 @@ class admin_controller
 		$this->template->assign_vars([
 			'DOWNLOAD' 			=> (array_key_exists('download', $version_data)) ? '<a class="download" href =' . $version_data['download'] . '>' . $this->language->lang('NEW_VERSION_LINK') . '</a>' : '',
 
- 			'EXT_IMAGE_PATH'	=> $this->ext_images_path,
+			'EXT_IMAGE_PATH'	=> $this->ext_images_path,
 
 			'HEAD_TITLE' 		=> $this->language->lang('TOPIC_AGE_WARNING'),
 			'HEAD_DESCRIPTION'	=> $this->language->lang('TOPIC_AGE_WARNING_EXPLAIN'),

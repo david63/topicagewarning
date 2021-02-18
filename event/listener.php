@@ -59,7 +59,6 @@ class listener implements EventSubscriberInterface
 	 */
 	public function viewtopic_warning_message($event)
 	{
- 		$this->main_controller->viewtopic_warning_message($event);
+		$this->main_controller->viewtopic_warning_message($event);
 	}
-
 }

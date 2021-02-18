@@ -1,35 +1,24 @@
+imports:
+    - { resource: alias.yml }
+
 services:
+    _defaults:
+        autowire: true
+        bind:
+            $tables: '%tables%'
+            $ext_images_path: '%core.root_path%ext/david63/forumsubs/adm/style/images'
+        public: true
+
     david63.topicagewarning.listener:
         class: david63\topicagewarning\event\listener
-        arguments:
-            - '@config'
-            - '@template'
-            - '@auth'
-            - '@user'
-            - '@dbal.conn'
-            - '@language'
-            - '@config_text'			
-            - '@david63.topicagewarning.core.functions'
-            - '%tables%'
         tags:
             - { name: event.listener }
 
     david63.topicagewarning.admin.controller:
         class: david63\topicagewarning\controller\admin_controller
-        arguments:
-            - '@config'
-            - '@request'
-            - '@template'
-            - '@user'
-            - '@config_text'
-            - '@language'
-            - '@log'
-            - '@david63.topicagewarning.core.functions'
+
+    david63.topicagewarning.main.controller:
+        class: david63\topicagewarning\controller\main_controller
 
     david63.topicagewarning.core.functions:
         class: david63\topicagewarning\core\functions
-        arguments:
-            - '@ext.manager'
-
-    _defaults:
-        public: true

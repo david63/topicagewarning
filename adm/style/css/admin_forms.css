@@ -65,7 +65,7 @@ select, #sk, #sd, #fc, #fb {
 	font-size: 12px;
 	font-weight: bold;
 	margin: 0.25em;
-	overflow: hidden;
+	overflow: scroll;
 	padding: 0.25em 10px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -407,6 +407,52 @@ legend {
 
 
 /* ---------
+Quote block
+--------- */
+blockquote {
+	background: #ebebeb none 6px 8px no-repeat;
+	border: 1px solid #dbdbdb;
+	font-size: 0.95em;
+	margin: 0.5em 1px 0 25px;
+	overflow: hidden;
+	padding: 5px;
+	border-radius: 1em;
+	border-width: 0.1em;
+	border-style: solid;
+	border-color: #d7d7d7;
+}
+
+blockquote blockquote {
+	/* Nested quotes */
+	background-color: #bababa;
+	font-size: 1em;
+	margin: 0.5em 1px 0 15px;
+}
+
+blockquote blockquote blockquote {
+	/* Nested quotes */
+	background-color: #e4e4e4;
+}
+
+blockquote cite {
+	/* Username/source of quoter */
+	font-style: normal;
+	font-weight: bold;
+	margin-left: 20px;
+	display: block;
+	font-size: 0.9em;
+}
+
+blockquote cite cite {
+	font-size: 1em;
+}
+
+blockquote.uncited {
+	padding-top: 25px;
+}
+
+
+/* ---------
 Tables
 --------- */
 .table {
@@ -508,20 +554,12 @@ Tables
 	background-color: #DCEBFE;
 }
 
-.table-row11 {
-	width: auto !important;
-	min-width: inherit;
-	background-color: #F9F9F9;
-	display: table-row;
-	position: relative;
-}
-
 .table-row-span {
 	display: none;
 	width: 700px;
 }
 
-.table-body-cell, .table-body-cell-bold, .table-body-cell-select, .table-body-cell-span, .table-body-cell-narrow, .table-body-cell-wide, .table-body-cell-centre, .table-body-cell-right {
+.table-body-cell, .table-body-cell-bold, .table-body-cell-select, .table-body-cell-span, .table-body-cell-narrow, .table-body-cell-wide, .table-body-cell-centre, .table-body-cell-right, .table-body-cell-tiny {
 	display: table-cell;
 	text-align: left;
 	vertical-align: middle;
@@ -688,6 +726,22 @@ PayPal button
 	font-family: FontAwesome;
 	padding-right: 10px;
 	font-size: 24px;
+}
+
+.qrimage {
+	display: block;
+	margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 200px;
+    width: 200px;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.donate-content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
 }
 
 

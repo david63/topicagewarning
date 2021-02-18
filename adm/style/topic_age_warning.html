@@ -1,133 +1,132 @@
-{% include '@' ~ NAMESPACE ~ '/head_panel.html' %}
+{% extends 'base.html' %}
 
-<form id="topicagewarning" method="post" action="{U_ACTION}">
+{% block content %}
+	<form id="topicagewarning" method="post" action="{U_ACTION}">
+		<fieldset>
+			<legend>{{ lang('TAW_SETTINGS') }}</legend>
 
-	<fieldset>
-		<legend>{{ lang('TAW_SETTINGS') }}</legend>
+			<dl>
+				<dt><label for="taw_interval">{{ lang('TAW_INTERVAL') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_INTERVAL_EXPLAIN') }}</span></dt>
+				<dd>
+					<input class="textbox2" name="taw_interval" type="number" id="taw_interval" value="{{ TAW_INTERVAL }}" maxlength="2" size="2" min="0" max="30" />&nbsp;&nbsp;{{ TAW_INTERVAL_TYPE }}
+				</dd>
+			</dl>
 
-		<dl>
-			<dt><label for="taw_interval">{{ lang('TAW_INTERVAL') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_INTERVAL_EXPLAIN') }}</span></dt>
-			<dd>
-				<input class="textbox2" name="taw_interval" type="number" id="taw_interval" value="{{ TAW_INTERVAL }}" maxlength="2" size="2" min="0" max="30" />&nbsp;&nbsp;{{ TAW_INTERVAL_TYPE }}
-			</dd>
-		</dl>
+			<dl>
+				<dt><label for="taw_lock">{{ lang('TAW_LOCK') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_LOCK_EXPLAIN') }}</span></dt>
+				<dd>
+					<input type="radio" id="taw_lock1" name="taw_lock" value="1"{% if TAW_LOCK %} checked="checked"{% endif %} />
+					<label class="set" for="taw_lock1">{{ lang('YES') }}</label>
+					<input type="radio" id="taw_lock0" name="taw_lock" value="0"{% if not TAW_LOCK %} checked="checked"{% endif %} />
+					<label class="unset" for="taw_lock0">{{ lang('NO') }}</label>
+				</dd>
+			</dl>
 
-		<dl>
-			<dt><label for="taw_lock">{{ lang('TAW_LOCK') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_LOCK_EXPLAIN') }}</span></dt>
-			<dd>
-				<input type="radio" id="taw_lock1" name="taw_lock" value="1"{% if TAW_LOCK %} checked="checked"{% endif %} />
-				<label class="set" for="taw_lock1">{{ lang('YES') }}</label>
-				<input type="radio" id="taw_lock0" name="taw_lock" value="0"{% if not TAW_LOCK %} checked="checked"{% endif %} />
-				<label class="unset" for="taw_lock0">{{ lang('NO') }}</label>
-			</dd>
-		</dl>
+			<dl>
+				<dt><label for="taw_author_exempt">{{ lang('TAW_AUTHOR_EXEMPT') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_AUTHOR_EXEMPT_EXPLAIN') }}</span></dt>
+				<dd>
+					<input type="radio" id="taw_author_exempt1" name="taw_author_exempt" value="1"{% if TAW_AUTHOR_EXEMPT %} checked="checked"{% endif %} />
+					<label class="set" for="taw_author_exempt1">{{ lang('YES') }}</label>
+					<input type="radio" id="taw_author_exempt0" name="taw_author_exempt" value="0"{% if not TAW_AUTHOR_EXEMPT %} checked="checked"{% endif %} />
+					<label class="unset" for="taw_author_exempt0">{{ lang('NO') }}</label>
+				</dd>
+			</dl>
 
-		<dl>
-			<dt><label for="taw_author_exempt">{{ lang('TAW_AUTHOR_EXEMPT') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_AUTHOR_EXEMPT_EXPLAIN') }}</span></dt>
-			<dd>
-				<input type="radio" id="taw_author_exempt1" name="taw_author_exempt" value="1"{% if TAW_AUTHOR_EXEMPT %} checked="checked"{% endif %} />
-				<label class="set" for="taw_author_exempt1">{{ lang('YES') }}</label>
-				<input type="radio" id="taw_author_exempt0" name="taw_author_exempt" value="0"{% if not TAW_AUTHOR_EXEMPT %} checked="checked"{% endif %} />
-				<label class="unset" for="taw_author_exempt0">{{ lang('NO') }}</label>
-			</dd>
-		</dl>
+			<dl>
+				<dt><label for="taw_admin_exempt">{{ lang('TAW_ADMIN_EXEMPT') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_ADMIN_EXEMPT_EXPLAIN') }}</span></dt>
+				<dd>
+					<input type="radio" id="taw_admin_exempt1" name="taw_admin_exempt" value="1"{% if TAW_ADMIN_EXEMPT %} checked="checked"{% endif %} />
+					<label class="set" for="taw_admin_exempt1">{{ lang('YES') }}</label>
+					<input type="radio" id="taw_admin_exempt0" name="taw_admin_exempt" value="0"{% if not TAW_ADMIN_EXEMPT %} checked="checked"{% endif %} />
+					<label class="unset" for="taw_admin_exempt0">{{ lang('NO') }}</label>
+				</dd>
+			</dl>
 
-		<dl>
-			<dt><label for="taw_admin_exempt">{{ lang('TAW_ADMIN_EXEMPT') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_ADMIN_EXEMPT_EXPLAIN') }}</span></dt>
-			<dd>
-				<input type="radio" id="taw_admin_exempt1" name="taw_admin_exempt" value="1"{% if TAW_ADMIN_EXEMPT %} checked="checked"{% endif %} />
-				<label class="set" for="taw_admin_exempt1">{{ lang('YES') }}</label>
-				<input type="radio" id="taw_admin_exempt0" name="taw_admin_exempt" value="0"{% if not TAW_ADMIN_EXEMPT %} checked="checked"{% endif %} />
-				<label class="unset" for="taw_admin_exempt0">{{ lang('NO') }}</label>
-			</dd>
-		</dl>
+			<dl>
+				<dt><label for="taw_mod_exempt">{{ lang('TAW_MOD_EXEMPT') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_MOD_EXEMPT_EXPLAIN') }}</span></dt>
+				<dd>
+					<input type="radio" id="taw_mod_exempt1" name="taw_mod_exempt" value="1"{% if TAW_MOD_EXEMPT %} checked="checked"{% endif %} />
+					<label class="set" for="taw_mod_exempt1">{{ lang('YES') }}</label>
+					<input type="radio" id="taw_mod_exempt0" name="taw_mod_exempt" value="0"{% if not TAW_MOD_EXEMPT %} checked="checked"{% endif %} />
+					<label class="unset" for="taw_mod_exempt0">{{ lang('NO') }}</label>
+				</dd>
+			</dl>
 
-		<dl>
-			<dt><label for="taw_mod_exempt">{{ lang('TAW_MOD_EXEMPT') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_MOD_EXEMPT_EXPLAIN') }}</span></dt>
-			<dd>
-				<input type="radio" id="taw_mod_exempt1" name="taw_mod_exempt" value="1"{% if TAW_MOD_EXEMPT %} checked="checked"{% endif %} />
-				<label class="set" for="taw_mod_exempt1">{{ lang('YES') }}</label>
-				<input type="radio" id="taw_mod_exempt0" name="taw_mod_exempt" value="0"{% if not TAW_MOD_EXEMPT %} checked="checked"{% endif %} />
-				<label class="unset" for="taw_mod_exempt0">{{ lang('NO') }}</label>
-			</dd>
-		</dl>
+			<dl>
+				<dt><label for="taw_last_post">{{ lang('TAW_LAST_POST') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_LAST_POST_EXPLAIN') }}</span></dt>
+				<dd>
+					<input type="radio" id="taw_last_post1" name="taw_last_post" value="1"{% if TAW_LAST_POST %} checked="checked"{% endif %} />
+					<label class="set" for="taw_last_post1">{{ lang('YES') }}</label>
+					<input type="radio" id="taw_last_post0" name="taw_last_post" value="0"{% if not TAW_LAST_POST %} checked="checked"{% endif %} />
+					<label class="unset" for="taw_last_post0">{{ lang('NO') }}</label>
+				</dd>
+			</dl>
 
-		<dl>
-			<dt><label for="taw_last_post">{{ lang('TAW_LAST_POST') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_LAST_POST_EXPLAIN') }}</span></dt>
-			<dd>
-				<input type="radio" id="taw_last_post1" name="taw_last_post" value="1"{% if TAW_LAST_POST %} checked="checked"{% endif %} />
-				<label class="set" for="taw_last_post1">{{ lang('YES') }}</label>
-				<input type="radio" id="taw_last_post0" name="taw_last_post" value="0"{% if not TAW_LAST_POST %} checked="checked"{% endif %} />
-				<label class="unset" for="taw_last_post0">{{ lang('NO') }}</label>
-			</dd>
-		</dl>
+			<dl>
+				<dt><label for="taw_quickreply">{{ lang('TAW_QUICKREPLY') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_QUICKREPLY_EXPLAIN') }}</span></dt>
+				<dd>
+					<input type="radio" id="taw_quickreply1" name="taw_quickreply" value="1"{% if TAW_QUICKREPLY %} checked="checked"{% endif %} />
+					<label class="set" for="taw_quickreply1">{{ lang('YES') }}</label>
+					<input type="radio" id="taw_quickreply0" name="taw_quickreply" value="0"{% if not TAW_QUICKREPLY %} checked="checked"{% endif %} />
+					<label class="unset" for="taw_quickreply0">{{ lang('NO') }}</label>
+				</dd>
+			</dl>
 
-		<dl>
-			<dt><label for="taw_quickreply">{{ lang('TAW_QUICKREPLY') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_QUICKREPLY_EXPLAIN') }}</span></dt>
-			<dd>
-				<input type="radio" id="taw_quickreply1" name="taw_quickreply" value="1"{% if TAW_QUICKREPLY %} checked="checked"{% endif %} />
-				<label class="set" for="taw_quickreply1">{{ lang('YES') }}</label>
-				<input type="radio" id="taw_quickreply0" name="taw_quickreply" value="0"{% if not TAW_QUICKREPLY %} checked="checked"{% endif %} />
-				<label class="unset" for="taw_quickreply0">{{ lang('NO') }}</label>
-			</dd>
-		</dl>
+			<dl>
+				<dt><label for="taw_forums">{{ lang('TAW_LOOK_UP_FORUMS') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_LOOK_UP_FORUMS_EXPLAIN') }}</span></dt>
+				<dd>
+					<select id="multi" name="taw_forums[]" multiple="multiple" size="10">{{ S_FORUM_OPTIONS }}</select>
+				</dd>
+			</dl>
 
-		<dl>
-			<dt><label for="taw_forums">{{ lang('TAW_LOOK_UP_FORUMS') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_LOOK_UP_FORUMS_EXPLAIN') }}</span></dt>
-			<dd>
-				<select id="multi" name="taw_forums[]" multiple="multiple" size="10">{{ S_FORUM_OPTIONS }}</select>
-			</dd>
-		</dl>
+			<dl>
+				<dt><label for="all_forums">{{ lang('ALL_FORUMS') }}{{ lang('COLON') }}</label></dt>
+				<dd>
+					<input type="radio" id="taw_all_forums1" name="taw_all_forums" value="1"{% if TAW_ALL_FORUMS %} checked="checked"{% endif %} />
+					<label class="set" for="taw_all_forums1">{{ lang('YES') }}</label>
+					<input type="radio" id="taw_all_forums0" name="taw_all_forums" value="0"{% if not TAW_ALL_FORUMS %} checked="checked"{% endif %} />
+					<label class="unset" for="taw_all_forums0">{{ lang('NO') }}</label>
+				</dd>
+			</dl>
 
-		<dl>
-			<dt><label for="all_forums">{{ lang('ALL_FORUMS') }}{{ lang('COLON') }}</label></dt>
-			<dd>
-				<input type="radio" id="taw_all_forums1" name="taw_all_forums" value="1"{% if TAW_ALL_FORUMS %} checked="checked"{% endif %} />
-				<label class="set" for="taw_all_forums1">{{ lang('YES') }}</label>
-				<input type="radio" id="taw_all_forums0" name="taw_all_forums" value="0"{% if not TAW_ALL_FORUMS %} checked="checked"{% endif %} />
-				<label class="unset" for="taw_all_forums0">{{ lang('NO') }}</label>
-			</dd>
-		</dl>
+			<dl>
+				<dt><label for="taw_message_top">{{ lang('TAW_MESSAGE_TOP') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_MESSAGE_TOP_EXPLAIN') }}</span></dt>
+				<dd>
+					<input type="radio" id="taw_message_top1" name="taw_message_top" value="1"{% if TAW_MESSAGE_TOP %} checked="checked"{% endif %} />
+					<label class="set" for="taw_message_top1">{{ lang('YES') }}</label>
+					<input type="radio" id="taw_message_top0" name="taw_message_top" value="0"{% if not TAW_MESSAGE_TOP %} checked="checked"{% endif %} />
+					<label class="unset" for="taw_message_top0">{{ lang('NO') }}</label>
+				</dd>
+			</dl>
 
-		<dl>
-			<dt><label for="taw_message_top">{{ lang('TAW_MESSAGE_TOP') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_MESSAGE_TOP_EXPLAIN') }}</span></dt>
-			<dd>
-				<input type="radio" id="taw_message_top1" name="taw_message_top" value="1"{% if TAW_MESSAGE_TOP %} checked="checked"{% endif %} />
-				<label class="set" for="taw_message_top1">{{ lang('YES') }}</label>
-				<input type="radio" id="taw_message_top0" name="taw_message_top" value="0"{% if not TAW_MESSAGE_TOP %} checked="checked"{% endif %} />
-				<label class="unset" for="taw_message_top0">{{ lang('NO') }}</label>
-			</dd>
-		</dl>
+			<dl>
+				<dt><label for="taw_message_bottom">{{ lang('TAW_MESSAGE_BOTTOM') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_MESSAGE_BOTTOM_EXPLAIN') }}</span></dt>
+				<dd>
+					<input type="radio" id="taw_message_bottom1" name="taw_message_bottom" value="1"{% if TAW_MESSAGE_BOTTOM %} checked="checked"{% endif %} />
+					<label class="set" for="taw_message_bottom1">{{ lang('YES') }}</label>
+					<input type="radio" id="taw_message_bottom0" name="taw_message_bottom" value="0"{% if not TAW_MESSAGE_BOTTOM %} checked="checked"{% endif %} />
+					<label class="unset" for="taw_message_bottom0">{{ lang('NO') }}</label>
+				</dd>
+			</dl>
 
-		<dl>
-			<dt><label for="taw_message_bottom">{{ lang('TAW_MESSAGE_BOTTOM') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_MESSAGE_BOTTOM_EXPLAIN') }}</span></dt>
-			<dd>
-				<input type="radio" id="taw_message_bottom1" name="taw_message_bottom" value="1"{% if TAW_MESSAGE_BOTTOM %} checked="checked"{% endif %} />
-				<label class="set" for="taw_message_bottom1">{{ lang('YES') }}</label>
-				<input type="radio" id="taw_message_bottom0" name="taw_message_bottom" value="0"{% if not TAW_MESSAGE_BOTTOM %} checked="checked"{% endif %} />
-				<label class="unset" for="taw_message_bottom0">{{ lang('NO') }}</label>
-			</dd>
-		</dl>
+			<dl>
+				<dt><label for="taw_show_locked">{{ lang('TAW_SHOW_LOCKED') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_SHOW_LOCKED_EXPLAIN') }}</span></dt>
+				<dd>
+					<input type="radio" id="taw_show_locked1" name="taw_show_locked" value="1"{% if TAW_SHOW_LOCKED %} checked="checked"{% endif %} />
+					<label class="set" for="taw_show_locked1">{{ lang('YES') }}</label>
+					<input type="radio" id="taw_show_locked0" name="taw_show_locked" value="0"{% if not TAW_SHOW_LOCKED %} checked="checked"{% endif %} />
+					<label class="unset" for="taw_show_locked0">{{ lang('NO') }}</label>
+				</dd>
+			</dl>
+		</fieldset>
 
-		<dl>
-			<dt><label for="taw_show_locked">{{ lang('TAW_SHOW_LOCKED') }}{{ lang('COLON') }}</label><br><span>{{ lang('TAW_SHOW_LOCKED_EXPLAIN') }}</span></dt>
-			<dd>
-				<input type="radio" id="taw_show_locked1" name="taw_show_locked" value="1"{% if TAW_SHOW_LOCKED %} checked="checked"{% endif %} />
-				<label class="set" for="taw_show_locked1">{{ lang('YES') }}</label>
-				<input type="radio" id="taw_show_locked0" name="taw_show_locked" value="0"{% if not TAW_SHOW_LOCKED %} checked="checked"{% endif %} />
-				<label class="unset" for="taw_show_locked0">{{ lang('NO') }}</label>
-			</dd>
-		</dl>
-	</fieldset>
-
-	<fieldset>
-		<legend>{{ lang('ACP_SUBMIT_CHANGES') }}</legend>
-		<p class="submit-buttons">
-			<input class="adm-button" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
-			<input class="adm-button" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
-		</p>
-		{{ S_FORM_TOKEN }}
-	</fieldset>
-</form>
-
-{% include '@' ~ NAMESPACE ~ '/donate.html' %}
+		<fieldset>
+			<legend>{{ lang('ACP_SUBMIT_CHANGES') }}</legend>
+			<p class="submit-buttons">
+				<input class="adm-button" type="submit" id="submit" name="submit" value="{{ lang('SAVE') }}" />&nbsp;
+				<input class="adm-button" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
+			</p>
+			{{ S_FORM_TOKEN }}
+		</fieldset>
+	</form>
+{% endblock %}
